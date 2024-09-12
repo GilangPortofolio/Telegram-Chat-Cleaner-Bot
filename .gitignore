@@ -1,7 +1,0 @@
-# Abaikan file session
-bot.session
-user_session.session
-# Abaikan file script
-# Konfigurasi
-.gitignore
-__pycache__
