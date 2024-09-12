@@ -31,19 +31,17 @@ session_name = config.SESSION_NAME
 # Membuat client pengguna
 client = TelegramClient(session_name, api_id, api_hash)
 
+def display_header(filename):
+    with open(filename, 'r', encoding='utf-8') as file:
+        header = file.read()
+    print(Fore.GREEN + header)
+
 async def display_and_confirm_chats():
     await client.start(phone_number)
     
     # Menampilkan header
-    print(Fore.GREEN + """
-    *************************************
-    *       🚀 BOT DIBUAT OLEH: GILANG PORTOFOLIO                   *
-    *🌟 JOIN CHANNEL TELEGRAM UNTUK MENGETAHUI UPDATE TERBARU 🌟    *
-    *📢 Disini >> [GPP | CHANNEL](https://t.me/+RGKsWtrOBVE5NGJl)   *
-    *📧 Email: Gilang.portofolioo@gmail.com                         *
-    *************************************
-    """)
-    print(Fore.WHITE + "Bot ini berfungsi untuk menghapus akun Telegram yang sudah menghapus akunnya.")
+    display_header('config.txt')
+    print(Fore.WHITE + "Bot ini berfungsi untuk menghapus akun Telegram yang sudah menghapus akunnya.\n")
     
     # Mendapatkan daftar obrolan
     dialogs = await client.get_dialogs()
@@ -53,7 +51,7 @@ async def display_and_confirm_chats():
     
     if not no_name_chats:
         print(Fore.WHITE + "Tidak ada obrolan tanpa nama yang ditemukan.")
-        print(Fore.WHITE + 'Bot telah berhasil menutup. Cek aplikasi Anda untuk log penghapusan.')
+        print(Fore.WHITE + 'Bot telah berhasil menutup.\n Cek aplikasi Anda untuk log penghapusan.')
         return
 
     # Menampilkan semua obrolan tanpa nama
@@ -61,7 +59,7 @@ async def display_and_confirm_chats():
         print(Fore.RED + f'ID: {dialog.id}, Nama: {dialog.name or "Tanpa Nama"}, Tipe: {dialog.entity.__class__.__name__}')
     
     # Konfirmasi untuk menghapus semua obrolan tanpa nama
-    confirm = input(Fore.WHITE + f'\nTotal {Fore.RED}{len(no_name_chats)} obrolan tanpa nama ditemukan. Apakah Anda ingin menghapus semua obrolan ini? [y/n]: ')
+    confirm = input(Fore.WHITE + f'\nTotal {Fore.RED}{len(no_name_chats)}{Fore.WHITE} obrolan tanpa nama ditemukan.\n Apakah Anda ingin menghapus semua obrolan ini? [y/n]: ')
     
     if confirm.lower() == 'y':
         for dialog in no_name_chats:
@@ -79,7 +77,7 @@ async def display_and_confirm_chats():
     else:
         print(Fore.WHITE + 'Tidak ada obrolan yang dihapus.')
 
-    print(Fore.WHITE + 'Bot telah berhasil menutup. Cek aplikasi Anda untuk log penghapusan.')
+    print(Fore.WHITE + 'Bot telah berhasil menutup.\n\n Cek aplikasi Anda untuk log penghapusan.')
 
 # Menjalankan fungsi utama
 client.loop.run_until_complete(display_and_confirm_chats())
