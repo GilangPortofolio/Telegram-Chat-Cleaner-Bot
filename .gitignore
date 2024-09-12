@@ -2,4 +2,7 @@
 bot.session
 user_session.session
 # Abaikan file script
-bott.py
+config.py
+# Konfigurasi
+.gitignore
+__pycache__
