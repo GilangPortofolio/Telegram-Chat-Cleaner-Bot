@@ -37,6 +37,11 @@ def display_header(filename):
     print(Fore.GREEN + header)
 
 async def display_and_confirm_chats():
+    # Memeriksa apakah nomor telepon telah disediakan
+    if not phone_number:
+        print(Fore.RED + 'Error: Tidak ada nomor telepon yang diberikan dalam konfigurasi. Harap masukan no hp di file config.py.')
+        return
+    
     await client.start(phone_number)
     
     # Menampilkan header
